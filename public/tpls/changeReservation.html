@@ -1,0 +1,52 @@
+<div class="container panel">
+    <p>Your reservation status is :{{changeCtrl.reservation[0].status}}</p>
+    <form role="form" ng-submit="changeCtrl.changeReserve()">
+        <div class="form-group col-sm-6">
+            <label for="date">Date</label>
+                    <span ng-show="form.$submitted || form.date.$touched">
+                        <span ng-show="form.date.$error.required" class="validate">*Date is required</span>
+                    </span>
+            <p class="input-group">
+                <input type="text" class="form-control" id="date" name="date" uib-datepicker-popup ng-model="changeCtrl.reservation[0].date" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                     <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+            </p>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="t-time">Time</label>
+            <input type="time" id="t-time" class="form-control" ng-model="changeCtrl.reservation[0].time">
+        </div>
+
+
+        <div class="form-group col-sm-12">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter Your Name" ng-model="changeCtrl.reservation[0].name">
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Enter Your Phone" ng-model="changeCtrl.reservation[0].phone">
+        </div>
+        <div class="form-group col-sm-12">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="example@domain.com" ng-model="changeCtrl.reservation[0].email">
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="partySize">Party Size</label>
+            <input type="number" class="form-control" id="partySize" placeholder="# Guests" ng-model="changeCtrl.reservation[0].size">
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label for="specialNeed">Special Need</label>
+            <input type="text" class="form-control" id="specialNeed" placeholder="eg. Birthday, Anniversary, etc" ng-model="changeCtrl.reservation[0].special">
+        </div>
+
+        <div class="form-inline text-center col-md-12">
+            <label for="radiobox">Just cancel this reservation</label>
+            <input type="checkbox" id="radiobox" ng-model="changeCtrl.cancel">
+            <p><button type="submit" class="btn btn-primary">Submit</button></p>
+        </div>
+    </form>
+</div>

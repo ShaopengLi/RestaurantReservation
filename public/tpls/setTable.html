@@ -1,0 +1,55 @@
+<div class="container panel">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>SEATING AREA</h4>
+            <div class="row">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Table#</th>
+                        <th>Table Size</th>
+                        <th>Status</th>
+                        <th>Since</th>
+                        <th>CNF#</th>
+                        <th>Client Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="term in tableCtrl.tableList">
+                        <td>{{term._id}}</td>
+                        <td>{{term.size}}</td>
+                        <td>{{term.status}}</td>
+                        <td>{{term.since | date:'shortTime'}}</td>
+                        <td>{{term.CNF}}</td>
+                        <td>{{term.name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Table List</h4>
+            <button class="tableSquare" ng-click="tableCtrl.takeTable(1)" ng-style="tableCtrl.tableList[0].style" ng-disabled="tableCtrl.tableList[0].status == 'Occupied'">
+                <span>Table#1</span>
+                <span>{{tableCtrl.tableList[0].status}}</span>
+                <span>{{tableCtrl.tableList[0].name}}</span>
+            </button>
+            <button class="tableSquare" ng-click="tableCtrl.takeTable(2)" ng-style="tableCtrl.tableList[1].style" ng-disabled="tableCtrl.tableList[1].status == 'Occupied'">
+                <span>Table#2</span>
+                <span>{{tableCtrl.tableList[1].status}}</span>
+                <span>{{tableCtrl.tableList[1].name}}</span>
+            </button>
+            <button class="tableSquare" ng-click="tableCtrl.takeTable(3)" ng-style="tableCtrl.tableList[2].style" ng-disabled="tableCtrl.tableList[2].status == 'Occupied'">
+                <span>Table#3</span>
+                <span>{{tableCtrl.tableList[2].status}}</span>
+                <span>{{tableCtrl.tableList[2].name}}</span>
+            </button>
+            <button class="tableCircle" ng-click="tableCtrl.takeTable(4)" ng-style="tableCtrl.tableList[3].style" ng-disabled="tableCtrl.tableList[3].status == 'Occupied'">
+                <span>Table#4</span>
+                <span>{{tableCtrl.tableList[3].status}}</span>
+                <span>{{tableCtrl.tableList[3].name}}</span>
+            </button>
+
+        </div>
+    </div>
+</div>

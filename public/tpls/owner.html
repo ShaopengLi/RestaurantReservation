@@ -1,0 +1,208 @@
+<div class="container panel">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#reservations"><span class="glyphicon glyphicon-calendar"></span>Reservations</a></li>
+        <li><a data-toggle="tab" href="#seatting"><span class="glyphicon glyphicon-th"></span>Seating</a></li>
+        <li><a data-toggle="tab" href="#profile"><span class="glyphicon glyphicon-th-list"></span>Profile</a></li>
+        <li><a data-toggle="tab" href="#setting"><span class="glyphicon glyphicon-cog"></span>App Settings</a></li>
+        <li><a data-toggle="tab" href="#contact"><span class="glyphicon glyphicon-user"></span>Contacts</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="reservations" class="tab-pane fade in active">
+            <h4 align="left" class="page-header">Reservation List</h4>
+            <!--
+            <form class="form-inline">
+                <input type="search" class="form-control" size="150" placeholder="Search Reservations">
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+            -->
+            <div class="input-group searchGroup">
+                       <span class="input-group-btn">
+                           <button type="button" class="btn btn-default searchBtn">
+                               <span class="glyphicon glyphicon-search"></span>
+                           </button>
+                       </span>
+                <input type="text" ng-model="showCtrl.searchText.name" placeholder="search reservations..."  class="form-control searchBox" >
+            </div>
+            <ul class="pagination owner-paging">
+                <li><a href="#reservations"><<</a></li>
+                <li class="active"><a href="#reservations">1</a></li>
+                <li><a href="#reservations">2</a></li>
+                <li><a href="#reservations">3</a></li>
+                <li><a href="#reservations">4</a></li>
+                <li><a href="#reservations">5</a></li>
+                <li><a href="#reservations">>></a></li>
+            </ul>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>CNF#</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>#Size</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                    <th>Get table</th>
+                </tr>
+                </thead>
+                <tbody class="text-left">
+                <tr ng-repeat="term in showCtrl.list | filter:showCtrl.searchText">
+                    <td>{{term._id}}</td>
+                    <td>{{term.name}}</td>
+                    <td>{{term.date | date:'shortDate'}}</td>
+                    <td>{{term.time | date:'shortTime'}}</td>
+                    <td>{{term.size}}</td>
+                    <td>{{term.status}}</td>
+                    <td><a href="#/detail/{{term._id}}" class="btn btn-primary"><span class="glyphicon glyphicon-share">Detail</span></a></td>
+                    <td><a href="#/getTable/{{term._id}}" class="btn btn-success"><span class="glyphicon glyphicon-th-large">Table</span></a></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div id="seatting" class="tab-pane fade">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="page-header">Seating Area</h4>
+                        <div class="row">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Table#</th>
+                                    <th>Table Size</th>
+                                    <th>Status</th>
+                                    <th>Since</th>
+                                    <th>CNF#</th>
+                                    <th>Client Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="term in seatCtrl.tableList">
+                                    <td>{{term._id}}</td>
+                                    <td>{{term.size}}</td>
+                                    <td>{{term.status}}</td>
+                                    <td>{{term.since | date:'shortTime'}}</td>
+                                    <td>{{term.CNF}}</td>
+                                    <td>{{term.name}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4 class="page-header">Table List</h4>
+                        <button class="tableSquare" ng-click="seatCtrl.deleteTable(0)" ng-style="seatCtrl.tableList[0].style" ng-disabled="seatCtrl.tableList[0].status == 'Available'">
+                            <span>Table#1</span>
+                            <span>{{seatCtrl.tableList[0].status}}</span>
+                            <span>{{seatCtrl.tableList[0].name}}</span>
+                        </button>
+                        <button class="tableSquare" ng-click="seatCtrl.deleteTable(1)" ng-style="seatCtrl.tableList[1].style" ng-disabled="seatCtrl.tableList[1].status == 'Available'">
+                            <span>Table#2</span>
+                            <span>{{seatCtrl.tableList[1].status}}</span>
+                            <span>{{seatCtrl.tableList[1].name}}</span>
+                        </button>
+                        <button class="tableSquare" ng-click="seatCtrl.deleteTable(2)" ng-style="seatCtrl.tableList[2].style" ng-disabled="seatCtrl.tableList[2].status == 'Available'">
+                            <span>Table#3</span>
+                            <span>{{seatCtrl.tableList[2].status}}</span>
+                            <span>{{seatCtrl.tableList[2].name}}</span>
+                        </button>
+                        <button class="tableCircle" ng-click="seatCtrl.deleteTable(3)" ng-style="seatCtrl.tableList[3].style" ng-disabled="seatCtrl.tableList[3].status == 'Available'">
+                            <span>Table#4</span>
+                            <span>{{seatCtrl.tableList[3].status}}</span>
+                            <span>{{seatCtrl.tableList[3].name}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile" class="tab-pane fade">
+            <div class="container">
+                <h4 class="page-header">Now you can edit restaurant file:</h4>
+                <form role="form" ng-submit="profileCtrl.changeProfile()">
+                    <div class="form-group col-sm-12">
+                        <label for="name">Your Restaurant Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Restaurant Name" ng-model="profileCtrl.profile.name">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter Your Phone" ng-model="profileCtrl.profile.phone">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@domain.com" ng-model="profileCtrl.profile.email">
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="specific address" ng-model="profileCtrl.profile.address">
+                    </div>
+
+                    <div class="form-inline text-center">
+                        <p><button type="submit" class="btn btn-primary">Submit</button></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="setting" class="tab-pane fade">
+
+            <div class="container">
+                <form ng-submit="settingCtrl.changeSettings()">
+                    <h4 class="page-header">Auto Assign</h4>
+                    <div class="form-group form-inline text-center" >
+                        <label for="checkbox">check if your want auto assign table</label>
+                        <input type="checkbox" id="checkbox" class="form-control" ng-model="settingCtrl.setting.auto">
+                    </div>
+                    <hr>
+                    <div class="col-md-3">
+                        <p>Open Time</p>
+                        <uib-timepicker ng-model="settingCtrl.setting.openTime" ng-change="changed()" hour-step=1 minute-step=1 show-meridian="true"></uib-timepicker>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Closing Time</p>
+                        <uib-timepicker ng-model="settingCtrl.setting.closingTime" ng-change="changed()" hour-step=1 minute-step=1 show-meridian="true"></uib-timepicker>
+                    </div>
+
+
+                    <div class="form-group text-center col-md-12">
+                        <button type="submit" class="btn btn-primary">Make Change</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="contact" class="tab-pane fade">
+            <div class="container">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>CNF#</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>#size</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-left">
+                        <tr ng-repeat="term in contactCtrl.list | orderBy: 'name'">
+                            <td>{{term._id}}</td>
+                            <td>{{term.name}}</td>
+                            <td>{{term.date | date: 'shortDate'}}</td>
+                            <td>{{term.time | date: 'shortTime'}}</td>
+                            <td>{{term.size}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
